@@ -1,0 +1,164 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Product";
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link href="~/css/product.css" rel="StyleSheet" />
+
+
+<style>
+    li{
+        opacity:1;
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+    }
+
+        .action a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            margin: 0 5px;
+            padding: 5px 8px;
+            font-size: 15px;
+            border-radius: 5px;
+        }
+
+        .action .delet {
+            background-color: rgb(255, 0, 0);
+            opacity: .8;
+        }
+
+        .action .edit {
+            background-color: #c9cbd1b8;
+            opacity: .8;
+        }
+
+    .delet:hover, .edit:hover {
+        opacity: 1;
+    }
+
+</style>
+
+    <section class="rightside"  style="left:10px;" >
+        <h2>@Model.Name</h2>
+        <div class="content-product" style="width:118%;">
+            <div class="card-product">
+            @if (Model.Images.Count == 0)
+            {
+                <div class="image-product">
+                    <div>
+
+                        <div class="main-image" style="position: relative;">
+                            <li class="nonact"><img width="70" height="70" alt="Not found" /></li>
+                            <a class="edit" style="color: white; text-decoration:none;position: absolute; top: 10px; right: 10px;   background-color: rgba(210, 206, 206, 0.441); padding: 5px 8px; border-radius: 5px; "><i class="fas fa-edit"></i></a>
+                        </div>
+                        <ul id="listImage">
+                            @for (int i = 0; i < Model.Images.Count; i++)
+                            {
+                                if (i == 4)
+                                {
+                                    break;
+                                }
+                                if (i == 0)
+                                {
+                                    <li class="nonact"><img width="70" height="70" alt="Not found" /></li>
+                                }
+                                else
+                                {
+                                    <li class="nonact"><img  width="70" height="70" alt="Not found" /></li>
+                                }
+                            }
+                        </ul>
+
+                    </div>
+                </div>
+
+            }else{
+                <div class="image-product">
+                    <div>   
+                   
+                    <div class="main-image" style="position: relative;">
+                        <img src="@Url.Action("GetImage", "product", new { id = Model.Images.ElementAt(0).Id})" width="350" height="350" />
+                        <a class="edit"  style="color: white; text-decoration:none;position: absolute; top: 10px; right: 10px;   background-color: rgba(210, 206, 206, 0.441); padding: 5px 8px; border-radius: 5px; "><i class="fas fa-edit"></i></a>
+                    </div>
+                        <ul id="listImage">
+                        @for (int i = 0; i < Model.Images.Count;i++) {
+                            if (i == 4)
+                            {
+                                break;
+                            }
+                            if (i == 0)
+                            {
+                                <li class="nonact active"><img src="@Url.Action("GetImage", "product", new { id = Model.Images.ElementAt(i).Id })" width="70" height="70" /></li>
+                            }
+                            else{
+                                  <li class="nonact"><img src="@Url.Action("GetImage", "product", new { id = Model.Images.ElementAt(i).Id })" width="70" height="70" /></li>
+                            }
+                        }  
+                        </ul>
+
+                    </div>
+                </div>
+                }
+                <div>
+                    <h6> @Model.Name </h6>
+                <h4> @Model.Description</h4>
+                <h4>$@Model.Price</h4>
+                    <p style="color: green; background-color: rgba(43, 88, 43, 0.384); width: fit-content; border-radius: 5px; padding:2px 5px;">InStock</p>
+
+                    <h5>
+                        Supplier Name :
+                    @foreach (var purchaseItem in Model.purchaseItems)
+                    {
+                        @purchaseItem.Purchase.Supplier.Name <span>, </span>
+                    }
+
+                    </h5>
+                    <h5>Produc Quantity : @Model.StockQuantity</h5>
+                    <h5>Catigory : @Model.Catigory.Name</h5>
+                    <div class="line">
+                        <div></div>
+                    </div>
+
+                    <div class="items">
+                        <h5>About This Item</h5>
+                    @foreach(var aboutItem in Model.AboutItems)
+                    {
+                        <div class="action">
+                            <p><i class="fas fa-check glowing-check"></i>@aboutItem.Description</p>
+                            <a class="edit" asp-action="EditAbout" asp-route-Id="@aboutItem.Id"><i class="fas fa-edit"></i></a>
+                            <a class="delet" asp-action="DeletAbout" asp-route-Id="@aboutItem.Id"><i class="fas fa-trash"></i></a>
+                        </div>
+                    }
+                    
+                         </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<script>
+    var mainimage = document.getElementsByClassName("main-image")[0];
+    var listnonact = document.getElementsByClassName("nonact");
+    var edit = document.getElementsByClassName("edit")[0];
+    for (let i = 0; i < listnonact.length; i++) {
+        listnonact[i].onclick = function () {
+            for (let i = 0; i < listnonact.length; i++)
+                listnonact[i].classList.remove("active");
+            listnonact[i].classList.add("active");
+            var src = listnonact[i].firstElementChild.getAttribute("src");
+            mainimage.firstElementChild.src = src;  
+        }
+    }
+    
+    edit.onclick=function(){
+        let src1 = mainimage.firstElementChild.getAttribute("src");
+        edit.setAttribute("href", src1.replace("GetImage", "EditImage"));
+    }
+
+</script>

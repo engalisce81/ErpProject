@@ -1,0 +1,85 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Creat Order";
+}
+<link href="~/css/form.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<style>
+    .validatin-dngare {
+        color: red;
+    }
+</style>
+<div class="form-flex">
+    <div class="headtitle">
+        <h3>Creat Order</h3>
+    </div>
+    <div class="form-content">
+        <div class="hiderrcont" style="display: flex;">
+            <h4 style="color: #177ae0 !important;border-bottom:solid #177ae0 1px  ;"><i class="fas fa-cogs"></i> Genral detailes</h4>
+        </div>
+        <form asp-action="CreateData" asp-controller="Order">
+            <div class="form-group-2">
+                @* <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="Name">Order Name</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" asp-for="Name" placeholder=" Order Name..." />
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="Name"></span>
+                </div> *@
+                <div class="custom-picker" style="width: 98%;">
+                    <label asp-for="OrderDate"> Order Date</label>
+                    <input type="date" asp-for="OrderDate" id="styledDate" placeholder="Select Date" style="color: white;">
+                    <span class="validatin-dngare" asp-validation-for="OrderDate"></span>
+                </div>
+            </div>
+
+            <div class="form-group-2">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="CustomerId">Order To Customer</label>
+                    </div>
+                    <div class="form-input">
+                        <select asp-for="CustomerId" asp-items="@ViewBag.Customeers"></select>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="CustomerId"></span>
+                </div>
+                <div class="custom-picker" style="width: 50%;">
+                    <label asp-for="OrderTime"> Order Time</label>
+                    <input type="time" asp-for="OrderTime" id="styledTime" placeholder="Select Order Time..." style="color: white;">
+                    <span class="validatin-dngare" asp-validation-for="OrderTime"></span>
+                </div>
+            </div>
+
+            
+
+            
+
+            <div class="submit-buuton">
+                <button type="submit" class="submit1">
+                    Next step<i class="fas fa-arrow-right" style="padding-left:8px; "></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#styledDate", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+        flatpickr("#styledTime", {
+
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+        });
+    </script>
+}

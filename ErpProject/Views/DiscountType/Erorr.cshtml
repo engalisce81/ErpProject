@@ -1,0 +1,35 @@
+﻿<link href="~/css/form.css" rel="stylesheet"/>
+@{
+    ViewData["Title"] = "Erorr Discount Type";
+}
+<style>
+    .validatin-dngare{
+        color:red;
+    }
+</style>
+<div class="form-flex">
+    <div class="headtitle">
+        <h3>Creat Employee</h3>
+    </div>
+    <div class="form-content">
+        <div class="hiderrcont" style="display: flex;">
+            <h4 style="color: #177ae0 !important;border-bottom:solid #177ae0 1px  ;"><i class="fas fa-cogs"></i> Erorr Detailes</h4>
+        </div>
+        <div style="width:100%;">
+            <h1 style="color:#aab8c5; padding:10px;">If You Need Delet This DiscountType </h1>
+            <h3 style="color:#aab8c5; margin-left:10px; padding:10px;">Make sure you have deleted the items related to that item from Discount </h3>
+        </div>
+        <div class="submit-buuton" style="width:100%; display:flex;justify-content:center;">
+            <div style="width:60%;display:flex;justify-content:space-between">
+                <a asp-action="Index" asp-controller="Discount" class="erorr">
+                    Discounts<i class="fas fa-arrow-right" style="padding-left:8px; "></i>
+                </a>
+               
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

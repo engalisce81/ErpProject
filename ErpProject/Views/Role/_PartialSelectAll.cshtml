@@ -1,0 +1,14 @@
+﻿@model SelectAllVM
+
+<form asp-action="SelectAll">
+    <input type="hidden" asp-for="RoleId"/>
+    <td><input type="checkbox" asp-for="IsSelect"/></td>
+    <td>Role</td>
+    <td>
+        <div class="submit-buuton">
+            <button type="submit" class="erorr">
+                Selec All
+            </button>
+        </div>
+    </td>
+</form>

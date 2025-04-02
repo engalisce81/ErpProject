@@ -1,0 +1,41 @@
+﻿@model Catigory
+@{
+     ViewData["Title"] = "Creat Ctigory";
+}
+<link href="~/css/form.css" rel="stylesheet"/>
+<style>
+    .validatin-dngare{
+        color:red;
+    }
+</style>
+<div class="form-flex">
+    <div class="headtitle">
+        <h3>Creat Catigory</h3>
+    </div>
+    <div class="form-content">
+        <div class="hiderrcont" style="display: flex;">
+            <h4 style="color: #177ae0 !important;border-bottom:solid #177ae0 1px  ;"><i class="fas fa-cogs"></i> Genral detailes</h4>
+        </div>
+        <form asp-action="CreateData" asp-controller="Catigory">
+            <div class="form-group-2" style="width:100%;">
+                <div class="form-groupflex" style="width:100%;">
+                    <div class="form-label">
+                        <label  asp-for="Name">Catigory Name</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" asp-for="Name" placeholder=" Catigory Name..."/>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="submit-buuton">
+                <button type="submit" class="submit1">
+                    Add Catigory<i class="fas fa-arrow-right" style="padding-left:8px; "></i>
+                </button>
+            </div>
+    </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

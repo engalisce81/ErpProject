@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Discount>
+@{
+    ViewData["Title"] = "Discounts";
+}
+<link href="~/css/table.css" rel="stylesheet"/>
+<div class="rightside-flex">
+    <div class="table-content">
+        <h4 class="table-name">Discounts</h4>
+        <table class="table">
+            <thead> 
+                <div class="flexitem" >
+                    <div class="searchadd">
+                       
+                        <a class="addbutton" asp-action="Create" ><i class="fas fa-plus" style="color: white; padding-right:5px ;"></i> Add Discount</a>
+                    </div>
+                </div>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Employee Name</th>
+                <th> Discount Date</th>
+                <th> Total Discount</th>
+                <th style="width: 150px;">Action</th>
+            </thead>
+            <tbody>
+                @foreach(var discount in Model){
+                    <tr>
+                        <td>@discount.Id</td>
+                        <td>@discount.DiscountType.Name</td>
+                        <td>@discount.Employee.Name</td>
+                        <td>@discount.DateDiscount</td>
+                        <td>@discount.TotalDiscount</td>
+                        <td class="action">
+                            <div class="action-edit">
+                                <a class="edit" asp-action="Detailes" asp-route-Id="@discount.Id"><i class="fas fa-portrait"></i></a>
+                            </div>
+                            <div class="action-edit">
+                                <a class="edit" asp-action="Update" asp-route-Id="@discount.Id"><i class="fas fa-edit"></i></a>
+                            </div>
+                            <div class="action-delet">
+                                <a class="delet" data-id="@discount.Id"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="previousbt" >
+         </div>
+    </div>
+</div>
+<div class="card-confierm" style="position: absolute; top: 10px; left: 50%; width: 300px; height: 165px;">
+    <div style="position: relative;top: 35%;"><h4 style="color: white;text-align: center;">Are you sure Delet Item</h4></div>
+    <div class="card-content">
+        <div class="yes"><a href="" class="yeslink" style="color: white;" >Yes</a></div>
+        <div class="no"><a asp-action="Index" style="color: white;">No</a></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let delet = document.querySelectorAll(".delet");
+        let yes = document.getElementsByClassName("yeslink")[0];
+        let cardconfierm = document.getElementsByClassName("card-confierm")[0];
+        for (let i = 0; i < delet.length; i++) {
+            delet[i].onclick = function () {
+                if (cardconfierm.className == 'card-confierm') {
+                    cardconfierm.className = 'card-confiermshow';
+                }
+                else {
+                    cardconfierm.className = 'card-confierm';
+                }
+                let discountId = this.getAttribute('data-id');
+                yes.href = `/Discount/Delete/${discountId}`;
+
+            }
+        }
+    </script>
+}
+
+

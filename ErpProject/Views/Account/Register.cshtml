@@ -1,0 +1,61 @@
+﻿@model RegisterVM
+
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In Page</title>
+    <link href="~/css/Account.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome Back</h1>
+            <p>Please login to your account</p>
+        </div>
+
+        <form asp-action="Register">
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input type="email" id="email" asp-for="Email" placeholder="erp.com..." />
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input type="password" id="password" asp-for="Password" placeholder="Password...">
+                <span asp-validation-for="Password"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfermPassword"> Conferm Password</label>
+                <input type="password" id="password" asp-for="ConfermPassword" placeholder="Password...">
+                <span asp-validation-for="ConfermPassword"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input type="text" id="Adrres" asp-for="Name" placeholder="Addres...">
+                <span asp-validation-for="Name"></span>
+
+            </div>
+
+
+
+            <button type="submit">Sign In</button>
+
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </form>
+
+        
+    </div>
+</body>
+</html>

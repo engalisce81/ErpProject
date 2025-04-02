@@ -1,0 +1,77 @@
+﻿@model PurchaseItem
+@{
+    ViewData["Title"] = "Update Purchase Item";
+}
+<link href="~/css/form.css" rel="stylesheet" />
+<style>
+    .validatin-dngare {
+        color: red;
+    }
+</style>
+<div class="form-flex">
+    <div class="headtitle">
+        <h3>Edit PurchaseItem</h3>
+    </div>
+    <div class="form-content">
+        <div class="hiderrcont" style="display: flex;">
+            <h4 style="color: #177ae0 !important;border-bottom:solid #177ae0 1px  ;"><i class="fas fa-cogs"></i> Genral detailes</h4>
+
+        </div>
+        <form asp-action="EditData" asp-controller="PurchaseItem">
+
+            <div class="form-group">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="Quantity">Quantity</label>
+                    </div>
+                    <div class="form-input">
+                        <input asp-for="Quantity" type="text" placeholder="Purchase Quantity..." />
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="Quantity"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="UnitPricePurchse">Unit Price Purchse</label>
+                    </div>
+                    <div class="form-input">
+                        <input asp-for="UnitPricePurchse" type="text" placeholder="Purchase UnitPricePurchse..." />
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="UnitPricePurchse"></span>
+                </div>
+            </div>
+
+            <div class="form-group-2">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="PurchaseId">PurchaseItem To Purchase</label>
+                    </div>
+                    <div class="form-input">
+                        <select asp-for="PurchaseId" asp-items="@ViewBag.Purchases"></select>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="PurchaseId"></span>
+                </div>
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="ProductId">PurchaseItem To  Proudect</label>
+                    </div>
+                    <div class="form-input">
+                        <select asp-for="ProductId" asp-items="@ViewBag.Products"></select>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="ProductId"></span>
+                </div>
+            </div>
+
+            <div class="submit-buuton">
+                <button type="submit" class="submit1">
+                    Next step<i class="fas fa-arrow-right" style="padding-left:8px; "></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

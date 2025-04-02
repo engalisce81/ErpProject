@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "Sales";
+}
+<link href="~/css/table.css" rel="stylesheet"/>
+<div class="rightside-flex">
+    <div class="table-content">
+        <h4 class="table-name">Sales</h4>
+        <table class="table">
+            <thead> 
+                <div class="flexitem" >
+                    <div class="searchadd">
+                        <div style="position: relative;">
+                            <partial name="_PartialSearch" model="new SearchVM()" />
+                        </div>
+                    </div>
+                </div>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Sales Date</th>
+                <th>Sales Time</th>
+                <th>Total Amount</th>
+            </thead>
+            <tbody>
+                @foreach(var order in Model){
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.Name</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.OrderTime</td>
+                        <td>@order.TotalAmount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="previousbt" >
+         </div>
+    </div>
+</div>
+
+
+
+
+

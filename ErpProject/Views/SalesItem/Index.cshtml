@@ -1,0 +1,60 @@
+﻿@model IEnumerable<OrderItem>
+@{
+    ViewData["Title"] = "Order Items";
+}
+<link href="~/css/table.css" rel="stylesheet"/>
+<div class="rightside-flex">
+    <div class="table-content">
+        <h4 class="table-name">Sales Items</h4>
+        <table class="table">
+            <thead> 
+                <div class="flexitem" >
+                    <div class="searchadd">
+                        <div style="position: relative;">
+                            <partial name="_PartialSearch" model="new SearchVM()" />
+                        </div>
+                        <a class="addbutton" asp-action="CreateData" ><i class="fas fa-plus" style="color: white; padding-right:5px ;"></i> Add OrderItem</a>
+                    </div>
+                </div>
+                <th>ID</th>
+                <th>Prouduct Name</th>
+                <th>Sales Item Quantity</th>
+                <th>SalesItem Unit Price</th>
+                <th>Sales Name</th>
+                <th>Total Price </th>
+                <th>State</th>
+            </thead>
+            <tbody>
+                @foreach(var orderitem in Model){
+                    <tr>
+                        <td>@orderitem.Id</td>
+                        <td>
+                            <div class="imagename">
+@*                                 <img src="@Url.Action("GetImage", "employee", new { id = orderitem.Product.ImageId })" alt="Image" class="img-fluid" />
+ *@                                <p>@orderitem.Product.Name</p>
+                            </div>
+
+                        </td>
+                        <td>@orderitem.Quantity</td>
+                        <td>@orderitem.UnitPrice</td>
+                        <td>@orderitem.Order.Name</td>
+                        <td>@orderitem.TotalPric</td>
+                        @if(orderitem.State){
+                            <td style="color:green;"> Complete</td>
+                        }
+                        else{
+                            <td style="color:red;">Not Complete!</td>
+                            }
+                          
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="previousbt" >
+         </div>
+    </div>
+</div>
+
+
+
+

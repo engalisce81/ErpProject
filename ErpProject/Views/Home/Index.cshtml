@@ -1,0 +1,216 @@
+﻿@model TotalYear
+@{
+   
+
+}
+<link href="~/css/index.css" rel="stylesheet"/>
+<div class="rightside-flex-item">
+    <div class="item">
+        <div class="item-detailes">
+            <div class="item-edit">
+                <h1 style="color: rgb(34,197,94);"> <i class="fas fa-user-tie"></i></h1>
+                <h2>@Model.TotalExpensive</h2>
+                <p>Total Expenses</p>
+                <span>5.65%</span>
+            </div>
+        </div>
+
+        <div class="item-detailes">
+            <div class="item-edit">
+                <h1 style="color: rgb(127,86,218);"> <i class="fas fa-clipboard-list"></i></h1>
+                <h2 class="number">@Model.TotalOrder</h2>
+                <p>Total Orders</p>
+                <span class="precentage">5%</span>
+            </div>
+        </div>
+
+        <div class="item-detailes">
+            <div class="item-edit">
+                <h1 style="color: rgb(78,202,194);"> <i class="fas fa-hand-holding-usd"></i></h1>
+                <h2>@Model.TotalSales</h2>
+                <p>Total Sales</p>
+                <span>5.44%</span>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="rightside-flex">
+    <div class="content-rightside">
+
+        <div class="chart-container">
+            <canvas id="myLineChart" width="870" height="350"></canvas>
+        </div>
+
+        <div class="chartContainer" style="width: 300px;
+    height:350px;
+    display: flex;
+    background-color: #262d34;
+    border-radius: 10px;
+    overflow: hidden;">
+            <div id="chartContainer" style="width: 300px;height: 350px;"></div>
+        </div>
+
+    </div>
+</div>
+
+<div class="content-table">
+    <div class="two-tables">
+        <div class="table-one">
+            <table class="table-newAccount">
+                <thead>
+                    <div class="header-table">
+                        <div class="content-header">
+                            <p>New Accounts</p>
+                            <a asp-action="Index" asp-controller="Customer">View All</a>
+                        </div>
+                    </div>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Account</th>
+
+                </thead>
+                <tbody>
+                    @if(ViewBag.NewCustomer !=null)
+                    {
+                        @foreach (var customer in ViewBag.NewCustomer)
+                        {
+                            <tr>
+                                <td>@customer.Id</td>
+                                 <td>@customer.Name</td> 
+                                <td>@customer.Email</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="table-two">
+            <table class="table-recenttransaction">
+                <thead>
+                    <div class="header-table">
+                        <div class="content-header">
+                            <p>Recent Transactions</p>
+                            <a asp-action="Index" asp-controller="OrderItem">View All</a>
+                        </div>
+                    </div>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Customer</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(ViewBag.NewTransaction!=null)
+                    {
+                        @foreach (var orderItem in ViewBag.NewTransaction)
+                        {
+                        <tr>
+                            <td>@orderItem.Id</td>
+                            <td>@orderItem.Product.Name</td>
+                            <td>@orderItem.Order.Name</td>
+                            <td>@orderItem.TotalPric</td>
+                        </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+<script>
+    var TotalSales = @Html.Raw(Json.Serialize(ViewBag.Totoalsales));
+    var TotalYears = @Html.Raw(Json.Serialize(ViewBag.TotoalYears));
+    // إعداد البيانات للرسم البياني
+    var ctx = document.getElementById('myLineChart').getContext('2d');
+    var myLineChart = new Chart(ctx, {
+        type: 'line',  // نوع الرسم البياني (خط)
+        data: {
+            labels: TotalYears,  // تسميات المحور X
+            datasets: [{
+                label: 'Sales',  // عنوان الرسم البياني
+                data: TotalSales,  // بيانات الرسم البياني
+                borderColor: '#4CAF50', // لون الخط
+                backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                textcolor:'white',  // لون الخلفية
+                borderWidth: 2,  // سمك الخط
+                fill: true,  // تعبئة المساحة أسفل الخط
+                tension: 0.4  // انحناء الخط
+            }]
+        },
+        options: {
+            responsive: true,  // استجابة حجم الرسم البياني
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Years'  // تسمية المحور X
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Sales'  // تسمية المحور Y
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'none',  // مكان عرض المفتاح
+                }
+            }
+        }
+    });
+
+
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "dark2",
+            backgroundColor: "#262d34",
+            exportFileName: "Doughnut Chart",
+            exportEnabled: false,
+            animationEnabled: true,
+            title: {
+                text: "Monthly Expense"
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: explodePie
+            },
+            data: [{
+                type: "doughnut",
+                innerRadius: 90,
+                showInLegend: true,
+                toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+                indexLabel: "{name} - #percent%",
+                dataPoints: [
+                    { y: @Model.TotalExpensive, name: "Expensive" },
+                    { y: @Model.TotalOrder, name: "Order" },
+                    { y: @Model.TotalSales, name: "Sale" }
+              
+                ]
+            }]
+        });
+        chart.render();
+
+        function explodePie(e) {
+            if (typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+            } else {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+            }
+            e.chart.render();
+            var rightside = document.getElementsByClassName("rightside")[0];
+            rightside.classList.add("animation");
+        }
+
+    }
+</script>

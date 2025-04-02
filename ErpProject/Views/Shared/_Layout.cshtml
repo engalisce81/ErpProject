@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet"/>
+    <title> @ViewData["Title"] </title>
+<style>
+        body .content .rightside {
+            width: 82%;
+            height: fit-content;
+            position: relative;
+            left: 270px;
+        }
+
+        .erorr {
+            color: white;
+            background-color: #007aff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px 0 rgba(28,132,238, .5);
+            font-size: 15px;
+            transition: .4s;
+            outline: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .erorr:hover {
+            transform: scale(1.05);
+        }
+</style>
+</head>
+    <body>
+        <main class="content">
+            <section class="liftside" >
+                <div class="content-liftside">
+                    <h2 class="namesystem"><a asp-controller="Home" asp-action="Index"><i class="fas fa-cogs"></i> <span> ERP Project</span> </a></h2>
+                    <ul class="listitem">
+                    @if (User.HasClaim("Permission", Permissions.Department.View.ToString())){ 
+                        <li><a asp-action="Index" asp-controller="Department"><i class="fas fa-clipboard-list"></i><span>Department</span></a></li>
+                    }
+                        <div class="droplist">
+                            <li class="dropli"><a><i class="fas fa-user-tie"></i> <span> Employee </span> <i class="fas fa-chevron-down" id="up"></i> </a></li>
+                            <div class="drop up">
+                                 @if (User.HasClaim("Permission", Permissions.Employee.View.ToString())){ 
+                                <a style="display: block;" asp-action="Index" asp-controller="Employee"><i class="fas fa-eye"></i><span>View Emps</span></a>
+                                 }
+                                 @if (User.HasClaim("Permission", Permissions.AttendanceAndDeparture.View.ToString())){
+                                <a style="display: block;" asp-action="Index" asp-controller="AttendanceAndDeparture"><i class="fas fa-check-circle"></i><span>Att And Dep</span></a>
+                                 }
+                            @if (User.HasClaim("Permission", Permissions.DiscountType.View.ToString()))
+                            {
+                                <a style="display: block;" asp-action="Index" asp-controller="DiscountType"><i class="fas fa-tags"></i> <span>Discount Type</span></a>
+                            }
+                            @if (User.HasClaim("Permission", Permissions.Discount.View.ToString())){
+                            <a style="display: block;" asp-action="Index" asp-controller="Discount"><i class="fas fa-cash-register icon"></i><span>Discount</span></a>
+                            }
+                            @if (User.HasClaim("Permission", Permissions.IncentiveType.View.ToString())){ 
+                            <a style="display: block;" asp-action="Index" asp-controller="IncentiveType"><i class="fas fa-gift"></i><span>Incentive Type</span></a>
+                            }
+                            @if (User.HasClaim("Permission", Permissions.Incentive.View.ToString())){
+                                 <a style="display: block;" asp-action="Index" asp-controller="Incentive"><i class="fas fa-trophy"></i><span>Incentive</span></a>
+                            }
+                            @if (User.HasClaim("Permission", Permissions.LeaveType.View.ToString())){     
+                            <a style="display: block;" asp-action="Index" asp-controller="LeaveType"><i class="fas fa-handshake"></i><span>Leave Type</span></a>
+                            }
+                        @if (User.HasClaim("Permission", Permissions.LeaveType.View.ToString())){     
+                            <a style="display: block;" asp-action="Index" asp-controller="Leave"><i class="fas fa-calendar-alt"></i><span>Leave</span></a>
+                        }
+                        </div>
+                        </div>
+                    @if (User.HasClaim("Permission", Permissions.Supplier.View.ToString()))
+                    {
+                        <li><a asp-action="Index" asp-controller="Supplier"><i class="fas fa-truck"></i><span>Suppliers</span></a></li>
+                    }
+                    @if (User.HasClaim("Permission", Permissions.Customer.View.ToString())){
+                        <li><a asp-action="Index" asp-controller="Customer"><i class="fas fa-boxes"></i><span>Customers</span> </a></li>
+                    }
+                     @if (User.HasClaim("Permission", Permissions.Catigory.View.ToString())){   
+                        <li><a asp-action="Index" asp-controller="Catigory"><i class="fas fa-th-list"></i> <span>Catigory</span></a> </li>
+                     }
+                    @if (User.HasClaim("Permission", Permissions.Product.View.ToString()))
+                    {
+                        <div class="droplist">
+                            <li class="dropli"><a><i class="fas fa-boxes"></i><span>Products</span> <i class="fas fa-chevron-down" id="up"></i> </a></li>
+                            <div class="drop up">
+                              <a style="display: block;" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-cart"></i><span>List pr</span></a>
+                              <a style="display: block;" asp-controller="Product" asp-action="ListProduct"><i class="fas fa-eye-dropper"></i><span>View Pr</span></a>
+                            </div>
+                        </div>
+                     }
+                    @if (User.HasClaim("Permission", Permissions.Order.View.ToString()))
+                    {
+                        <li><a asp-controller="Order" asp-action="Index"><i class="fas fa-clipboard-list"></i><span>Orders</span> </a></li>
+                    }
+                    @if (User.HasClaim("Permission", Permissions.OrderItem.View.ToString())){
+                        <li><a asp-controller="OrderItem" asp-action="Index"><i class="fas fa-list"></i><span>OrderItems</span> </a></li>
+                    }
+                     @if (User.HasClaim("Permission", Permissions.Purchase.View.ToString())){   
+                        <li><a asp-controller="Purchase" asp-action="Index"><i class="fas fa-shopping-cart"></i><span>Purchases</span> </a></li>
+                     }
+                      @if (User.HasClaim("Permission", Permissions.PurchaseItem.View.ToString())){  
+                        <li><a asp-controller="PurchaseItem" asp-action="Index"><i class="fas fa-credit-card"></i> <span> PurchaseItem</span> </a></li>
+                      }
+                    @if (User.IsInRole("Admin"))
+                    {
+                <li><a asp-controller="Sale" asp-action="Index"><i class="fas fa-hand-holding-usd"></i><span> Sales</span> </a></li>
+                       }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="SalesItem" asp-action="Index"><i class="fas fa-cash-register"></i><span> SalesItems</span> </a></li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                         <li><a asp-controller="Role" asp-action="Index"><i class="fas fa-user-shield"></i><span> Roles</span> </a></li>
+                     }
+                      @if (User.IsInRole("Admin")){  
+                        <li><a asp-controller="User" asp-action="Index"><i class="fas fa-user"></i><span> Users</span> </a></li>
+                      }
+                    @if (User.HasClaim("Permission", Permissions.Employee.View.ToString()))
+                    {
+                <li><a asp-controller="Image" asp-action="Index"> <i class="fas fa-camera"></i><span> Images</span> </a></li>
+                    }
+                </ul>
+                </div>
+            </section>
+            <section class="rightside">
+                @RenderBody()
+            </section>
+        </main>
+        <div  style="position:absolute; right:10px; top:20px;" >
+        <a class="erorr" asp-controller="Account" asp-action="SignOut" > <i class="fas fa-sign-out-alt"></i></a>
+        </div>
+        <script src="~/js/site.js">
+        </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    </body>
+</html>
+
+
+
+
+
+   
+

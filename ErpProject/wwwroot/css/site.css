@@ -1,0 +1,160 @@
+﻿
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --border-color: #2f3944;
+    --text-color: #ffffff;
+    --leftside-color: #262d34;
+    --body-color: #22282e;
+}
+
+body {
+    background-color: var(--body-color);
+    overflow-x: hidden;
+    font-family: "Wix Madefor Text",sans-serif;
+}
+
+a{
+    text-decoration:none;
+    color:#ffffff;
+}
+
+body .content {
+    display: flex;
+    height: 100%;
+}
+
+body .content .liftside {
+    width: 260px;
+    background-color: var(--leftside-color);
+    height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    border-right: solid var(--border-color) 1px;
+    scroll-behavior: smooth;
+}
+
+body .content .liftside:hover {
+    overflow-y: scroll;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    color: var(--text-color);
+    opacity: .5;
+    transition: .3s ease-out;
+}
+
+li a {
+    color: var(--text-color);
+    text-decoration:none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 20px;
+}
+
+li a i {
+    margin-right: 10px;
+}
+
+.namesystem {
+    margin: 10px;
+    color: var(--text-color);
+    opacity: .8;
+}
+
+body .content .liftside .content-liftside .namesystem:hover, .down a:hover {
+    opacity: 1;
+}
+
+.droplist {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+}
+
+.drop {
+    transition: max-height .4s linear;
+}
+
+.up {
+    max-height: 0;
+}
+
+.down {
+    max-height: 500px;
+}
+
+.down a, .up a {
+    color: var(--text-color);
+    opacity: .7;
+    padding: 10px;
+    padding-left: 40px;
+}
+
+.down a i, .up a i {
+    margin-right: 10px;
+}
+
+#up, #down {
+    font-size: 10px;
+    margin-left: 40px;
+    position: absolute;
+    right: 10px;
+}
+
+#up {
+    transform: rotate(90deg);
+    transition: transform .5s;
+}
+
+#down {
+    transform: rotate(0);
+    transition: transform .5s;
+}
+
+
+body .content .liftside .content-liftside .listitem li:hover, .dropli:hover, .down a:hover {
+    opacity: 1;
+    background: linear-gradient(to right, #4a5159 60%, #353b42c6 100%);
+}
+
+
+
+::-webkit-scrollbar {
+    width: 0px; 
+    height: 12px; 
+}
+
+
+::-webkit-scrollbar-track {
+    background-color: var(--leftside-color); 
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 10px;
+}
+
+  
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+body .content .rightside {
+    width: 82%;
+    height: fit-content;
+    position:relative;
+    left:270px;
+}
+
+

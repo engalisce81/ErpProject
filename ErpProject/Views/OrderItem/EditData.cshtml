@@ -1,0 +1,89 @@
+﻿@model OrderItem
+@{
+    ViewData["Title"] = "Update Order Item";
+}
+<link href="~/css/form.css" rel="stylesheet" />
+<style>
+    .validatin-dngare {
+        color: red;
+    }
+</style>
+<div class="form-flex">
+    <div class="headtitle">
+        <h3>Edit Order Item</h3>
+    </div>
+    <div class="form-content">
+        <div class="hiderrcont" style="display: flex;">
+            <h4 style="color: #177ae0 !important;borderitem-bottom:solid #177ae0 1px  ;"><i class="fas fa-cogs"></i> Genral detailes</h4>
+            <h4><i class="fas fa-cogs"></i> product Image</h4>
+            <h4><i class="fas fa-cogs"></i> finish</h4>
+        </div>
+        <form asp-action="EditData" asp-controller="OrderItem">
+            <div class="form-group-2">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="Quantity">OrderItem Quantity</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" asp-for="Quantity" placeholder=" OrderItem Quantity..." />
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="Quantity"></span>
+                </div>
+
+            </div>
+
+            <div class="form-group-2">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="OrderId">OrderItem To Order</label>
+                    </div>
+                    <div class="form-input">
+                        <select asp-for="OrderId" asp-items="@ViewBag.Orders"></select>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="OrderId"></span>
+                </div>
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="ProductId">OrderItem To  Proudect</label>
+                    </div>
+                    <div class="form-input">
+                        <select asp-for="ProductId" asp-items="@ViewBag.Products"></select>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="ProductId"></span>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <input type="checkbox" asp-for="State" />
+                    <label asp-for="State">Complete</label>
+                </div>
+            </div>
+
+
+
+
+            @* <div class="form-group">
+            <div class="form-groupflex">
+            <div class="form-label">
+            <label asp-for="TotalAmount">Total Amount</label>
+            </div>
+            <div class="form-input">
+            <input asp-for="TotalAmount" type="text" placeholder="OrderItem Amount..." />
+            </div>
+            <span class="validatin-dngare" asp-validation-for="TotalAmount"></span>
+
+            </div>
+            </div *@>
+
+            <div class="submit-buuton">
+                <button type="submit" class="submit1">
+                    Next step<i class="fas fa-arrow-right" style="padding-left:8px; "></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

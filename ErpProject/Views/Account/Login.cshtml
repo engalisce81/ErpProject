@@ -1,0 +1,48 @@
+﻿@model LoginVM
+
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="~/css/Account.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome Back</h1>
+            <p>Please login to your account</p>
+        </div>
+
+        <form asp-action="Login">
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input type="email" id="email" asp-for="Email" placeholder="erp.com..."/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input type="password" id="password" asp-for="Password" placeholder="Password...">
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember" asp-for="RememberMe"/>
+                <label asp-for="RememberMe">Keep me logged in</label>
+            </div>
+            <button type="submit">Login</button>
+
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </form>
+
+        <div class="signup-link">
+            Don't have an account? <a asp-action="Register" asp-controller="Account">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

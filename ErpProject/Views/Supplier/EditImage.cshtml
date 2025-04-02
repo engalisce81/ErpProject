@@ -1,0 +1,73 @@
+﻿@model StepImage
+@{
+    ViewData["Title"] = "Update Image";
+}
+<link href="~/css/image.css" rel="stylesheet" />
+<div class="form-flex">
+    <div class="headtitle">
+        <h3>Image Supplier</h3>
+    </div>
+    <div class="form-content">
+        <div class="hiderrcont" style="display: flex;">
+            <h4 style="color: #177ae0 !important;border-bottom:solid #177ae0 1px  ;"><i class="fas fa-image" style="padding: 0px 5px;"></i> product Image</h4>
+        </div>
+        <form asp-action="EditImage" class="upload-form" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id"/>
+            <div class="header-img">
+                <h4>Edit Image</h4>
+                <p>Add Product Gallery Images.</p>
+            </div>
+            <div class="form-file">
+                <input type="file" id="fileinput" asp-for="FormFile" />
+                <label asp-for="FormFile" for="fileinput" class="labelfile" style="position :relative;">
+                    <div class="card-text">
+                        <h1>
+                            <i class="fas fa-upload"></i>
+                        </h1>
+                        <h2>Drop file here or click Upload</h2>
+                    </div>
+                    <div class="img" style="position: absolute;left: 10px; overflow: hidden; border-radius: 10px;">
+                        <img src="@Url.Action("GetImage", "Supplier", new { id = Model.Id })" height="200px" />
+                    </div>
+                </label>
+                <span class="validatin-dngare" asp-validation-for="FormFile" style="color:red;"></span>
+
+            </div>
+
+            <div class="submit-buuton" style="display: flex;align-items: center; justify-content: space-between;">
+                <a class="previous"> <i class="fas fa-arrow-left"></i>previous</a>
+                <button type="submit" class="submit1">
+                    Edit Image<i class="fas fa-arrow-right" style="padding-left:8px; "></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script>
+    // تحديد عنصر input الملف وعنصر img
+    const fileInput = document.getElementById('fileinput');
+    const imgPreview = document.querySelector('.img img');
+
+    // إضافة حدث عند اختيار ملف
+    fileInput.addEventListener('change', function (e) {
+        const file = e.target.files[0]; // الحصول على الملف المحدد
+
+        if (file && file.type.startsWith('image/')) { // التأكد من أن الملف صورة
+            const reader = new FileReader(); // إنشاء كائن FileReader
+
+            reader.onload = function (e) {
+                // تعيين مصدر الصورة للبيانات المقروءة
+                imgPreview.src = e.target.result;
+            };
+
+            // قراءة الملف كـ URL
+            reader.readAsDataURL(file);
+        } else {
+            imgPreview.src = ''; // إفراغ الصورة إذا لم يكن الملف صورة
+        }
+    });
+</script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

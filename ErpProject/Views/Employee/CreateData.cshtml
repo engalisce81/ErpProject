@@ -1,0 +1,123 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Creat Employee";
+}
+<link href="~/css/form.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<style>
+    .validatin-dngare{
+        color:red;
+    }
+</style>
+<div class="form-flex">
+    <div class="headtitle">
+        <h3>Creat Employee</h3>
+    </div>
+    <div class="form-content">
+        <div class="hiderrcont" style="display: flex;">
+            <h4 style="color: #177ae0 !important;border-bottom:solid #177ae0 1px  ;"><i class="fas fa-cogs"></i> Genral detailes</h4>
+            <h4><i class="fas fa-cogs"></i> Employee Image</h4>
+            <h4><i class="fas fa-cogs"></i> finish</h4>
+        </div>
+        <form asp-action="CreateData" asp-controller="Employee">
+            <div class="form-group-2">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label  asp-for="Name">Employee Name</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" asp-for="Name" placeholder=" Employee Name..."/>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="Name"></span>
+                </div>
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="Email" >Employee Email</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" asp-for="Email" placeholder="Employee Email..."/>
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="Email"></span>
+                </div>
+            </div>
+                   
+            <div class="form-group">
+                <div class="form-group-2">
+                    <div class="form-groupflex">
+                        <div class="form-label">
+                            <label asp-for="Comment" >Employee Comment</label>
+                        </div>
+                        <div class="form-input">
+                            <textarea id="w3review" asp-for="Comment" class="sumarry">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.></textarea>
+                        </div>
+                        <span class="validatin-dngare" asp-validation-for="Comment"></span>
+                    </div>
+
+                    <div class="form-group-noflex" style="width:48%; " >
+                            <div class="form-groupflex" style="width: 100% !important;">
+                                <div class="form-label">
+                                    <label asp-for="Phone" >Employee Phone</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" asp-for="Phone" placeholder="Employee Phone..." style="margin-top:5px"/>
+                                </div>
+                            <span class="validatin-dngare" asp-validation-for="Phone"></span>
+
+                            </div>
+                        <div class="form-groupflex" style="width: 100% !important;">
+                                <div class="form-label">
+                                    <label asp-for="Address" >Employee Address</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" asp-for="Address" placeholder="Employee Address..." style="margin-top:5px"/>
+                                </div>
+                            <span class="validatin-dngare" asp-validation-for="Address"></span>
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-groupflex">
+                    <div class="form-label">
+                        <label asp-for="BasicSalary">Basic Salary</label>
+                    </div>
+                    <div class="form-input">
+                        <input asp-for="BasicSalary" type="text" placeholder="Employee Basic Salary..." />
+                    </div>
+                    <span class="validatin-dngare" asp-validation-for="BasicSalary"></span>
+
+                </div>
+            </div>
+            <div class="custom-picker" style="width: 100%;">
+                <label> Hire Date</label>
+                <input type="date" asp-for="HireDate" id="styledDate" placeholder="Select Date" style="color: white;">
+                <span class="validatin-dngare" asp-validation-for="HireDate"></span>
+            </div>
+            <div class="form-input" style="width:100%">
+                <label asp-for="DepartmentId">Department</label>
+                <select style="margin-top:5px" class="catigory" asp-for="DepartmentId" asp-items="@ViewBag.Departments">
+                </select>
+            </div>
+            <div class="submit-buuton">
+                <button type="submit" class="submit1" >
+                    Next step<i class="fas fa-arrow-right" style="padding-left:8px; "></i>
+                </button>
+            </div>
+                
+    </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#styledDate", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+    </script>
+}

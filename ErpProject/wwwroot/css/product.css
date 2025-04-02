@@ -1,0 +1,86 @@
+﻿.content-product {
+    margin: 10px;
+    background-color: #262d34;
+    border-radius: 7px;
+    border: #4a5159 solid 1px;
+}
+
+    .content-product .card-product {
+        display: flex;
+        padding: 15px;
+    }
+
+        .content-product .card-product .image-product {
+            width: 400px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+            .content-product .card-product .image-product ul {
+                list-style: none;
+                width: fit-content;
+                display: flex;
+                border-radius: 5px;
+                overflow: hidden;
+                justify-content: center;
+            }
+
+                .content-product .card-product .image-product ul li {
+                    background-color: #2f3943;
+                    width: 90px;
+                    height: 70px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+
+.active {
+    background-color: #1573d1 !important;
+    border-radius: 5px;
+    transition: .6s;
+}
+
+h6 {
+    color: rgb(25, 60, 236);
+}
+
+h4 {
+    color: #aab8c5;
+    margin: 15px 0;
+}
+
+h5 {
+    color: #aab8c5;
+    margin: 10px 0;
+}
+
+h2 {
+    color: #aab8c5;
+    margin: 10px 15px;
+}
+
+p {
+    color: #aab8c5;
+    margin-top: 10px;
+}
+
+.glowing-check {
+    color: #007bff; /* Example blue color */
+    text-shadow: 0 0 10px #007bff, 0 0 20px #007bff; /* Glow effect */
+    padding: 0 5px;
+}
+
+.line {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 15px 0;
+}
+
+    .line div {
+        width: 95%;
+        height: .5px;
+        background-color: #4a5159;
+    }

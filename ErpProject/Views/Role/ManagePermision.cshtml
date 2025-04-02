@@ -1,0 +1,39 @@
+﻿@model PermisionVM
+
+@{
+    ViewData["Title"] = "Manage Permision";
+}
+<link href="~/css/table.css" rel="stylesheet"/>
+<div class="rightside-flex">
+    <div class="table-content">
+        <h4 class="table-name">Manage Permisions</h4>
+        <form asp-action="ManagePermision" style="width:100%;">
+        <table class="table">
+            <thead> 
+                <th>Select</th>
+                <th>Name</th>
+                <th> Claims</th>
+            </thead>
+            <tbody>
+                    <input type="hidden" asp-for="RoleId" />
+
+                    @for (int i = 0; i < Model.checkBoxVMs.Count; i++)
+                    {
+                        <input type="hidden" asp-for="checkBoxVMs[i].DisplayValue" />
+                        <tr>
+                            <td><input type="checkbox" asp-for="checkBoxVMs[i].IsSelected" /> </td>
+                            <td> @Model.checkBoxVMs[i].DisplayValue.Split('.')[1]</td>
+                            <td> @Model.checkBoxVMs[i].DisplayValue.Split('.')[2]</td>                        
+                        </tr>
+                    }
+                 
+            </tbody>
+        </table>
+        <div class="submit-buuton">
+            <button type="submit" class="erorr">
+                Assign Permition
+            </button>
+        </div>
+        </form>
+    </div>
+</div>

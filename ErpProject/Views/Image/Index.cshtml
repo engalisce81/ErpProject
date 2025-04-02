@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Image>
+@{
+    ViewData["Title"] = "Images";
+}
+<link href="~/css/table.css" rel="stylesheet"/>
+<div class="rightside-flex">
+    <div class="table-content">
+        <h4 class="table-name">Images</h4>
+        <table class="table">
+            <thead> 
+                <div class="flexitem" >
+                    <div class="searchadd">
+                        <div style="position: relative;">
+                        </div>
+                    </div>
+                </div>
+                <th>ID</th>
+                <th>Name</th>
+                
+                <th style="width: 150px;">Action</th>
+            </thead>
+            <tbody>
+                @foreach(var image in Model){
+                    <tr>
+                        <td>@image.Id</td>
+                        <td>
+                            <div class="imagename">
+                                <img src="@Url.Action("GetImage", "image", new { id = image.Id })" alt="صورة" class="img-fluid" />
+                            </div>
+                            
+                       </td>
+                        
+                        <td class="action">
+                            <div class="action-delet">
+                                <a class="delet" data-id="@image.Id"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="previousbt" >
+         </div>
+    </div>
+</div>
+<div class="card-confierm" style="position: absolute; top: 10px; left: 50%; width: 300px; height: 165px;">
+    <div style="position: relative;top: 35%;"><h4 style="color: white;text-align: center;">Are you sure Delet Item</h4></div>
+    <div class="card-content">
+        <div class="yes"><a href="" class="yeslink" style="color: white;" >Yes</a></div>
+        <div class="no"><a asp-action="Index" style="color: white;">No</a></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let delet = document.querySelectorAll(".delet");
+        let yes = document.getElementsByClassName("yeslink")[0];
+        let cardconfierm = document.getElementsByClassName("card-confierm")[0];
+        for (let i = 0; i < delet.length; i++) {
+            delet[i].onclick = function () {
+                if (cardconfierm.className == 'card-confierm') {
+                    cardconfierm.className = 'card-confiermshow';
+                }
+                else {
+                    cardconfierm.className = 'card-confierm';
+                }
+                // yes.setAttribute('asp-route-id', delet[i].getAttribute('data-id'));
+                let imageId = this.getAttribute('data-id');
+                yes.href = `/Image/Delete/${imageId}`;
+
+            }
+        }
+    </script>
+}
+
+
